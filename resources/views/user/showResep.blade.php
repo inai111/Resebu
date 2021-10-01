@@ -30,11 +30,11 @@
                 </div>
         </div>
 
-        @if ($resep->id_kategori == 2)
+        @if ($resep->video != null)
             <div class="mb-3 row">
                 <label for="nama" class="col-sm-2 col-form-label">Video</label>
                 <div class="col-sm-10">
-                    <video src="{{ URL::asset('assets/videos/' . $resep->video) }}" width="720" class="border border-dark"
+                    <video src="{{ URL::asset('storage/videos/' . $resep->video) }}" width="720" class="border border-dark"
                         controls></video>
                 </div>
             </div>

@@ -21,7 +21,7 @@ class DatabaseSeeder extends Seeder
         DB::table('users')->insert([
             'username' => 'admin',
             'nama' => 'Admin nur Admin',
-            'email'=> Str::random(10).'@gm.co',
+            'email'=> 'admin@gm.co',
             'alamat' => Str::random(15),
             'nomer' => 8080,
             'password' => Hash::make(12341234),
@@ -30,12 +30,17 @@ class DatabaseSeeder extends Seeder
             'updated_at' => now(),
         ]);
         DB::table('kategoris')->insert([
-            'kategori'=>'Artikel',
+            'kategori'=>'Makanan Sehat',
             'created_at' => now(),
             'updated_at' => now(),
         ]);
         DB::table('kategoris')->insert([
-            'kategori'=>'Video',
+            'kategori'=>'Makanan Ringan',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+        DB::table('kategoris')->insert([
+            'kategori'=>'Makanan Berat',
             'created_at' => now(),
             'updated_at' => now(),
         ]);

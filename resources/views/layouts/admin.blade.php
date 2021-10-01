@@ -19,6 +19,7 @@
     <link href="{{ URL::asset('css/searchPanes.bootstrap5.min.css') }}" rel="stylesheet" />
     {{-- <link href="css/searchBuilder.bootstrap5.min.css" rel="stylesheet" /> --}}
     {{-- <link href="css/datatables.min.css" rel="stylesheet" /> --}}
+    <script src="https://code.jquery.com/jquery-3.5.1.js" crossorigin="anonymous"></script>
     <script src="{{ URL::asset('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js') }}"
         crossorigin="anonymous"></script>
     <style>
@@ -76,7 +77,7 @@
                 </div>
                 <div class="sb-sidenav-footer bg-secondary">
                     <div class="small text-dark">Hallo Chef,</div>
-                    <small class="text-dark">{{ auth()->user()->nama }} <img src="assets/img/hat.png"
+                    <small class="text-dark">{{ auth()->user()->nama }} <img src="{{ URL::asset('assets/img/hat.png') }}"
                             class="img-fluid pb-3" style="width: 20px" alt=""></small>
                 </div>
             </nav>
@@ -104,7 +105,6 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous">
     </script>
-    <script src="https://code.jquery.com/jquery-3.5.1.js" crossorigin="anonymous"></script>
     <script src="https://cdn.datatables.net/1.11.1/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>
     <script src="https://cdn.datatables.net/1.11.1/js/dataTables.bootstrap5.min.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
@@ -115,14 +115,6 @@
         document.addEventListener('trix-file-accept', function(e) {
             e.preventDefault();
         })
-        $(document).ready(function() {
-            $('#example').DataTable({
-                // searchPanes: {
-                //     // layout: 'columns-1'
-                // },
-                // // dom: 'Pfrtip'
-            })
-        });
     </script>
 </body>
 

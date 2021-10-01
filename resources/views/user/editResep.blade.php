@@ -46,9 +46,11 @@
             </div>
         </div>
         <div class="mb-3 row">
+            {{-- @dd(URL::asset('storage/images/'.$resep->gambar)) --}}
             <label for="gambar" class="col-sm-2 col-form-label">Gambar</label>
-            <div class="col-sm-10">
-                <input type="file" accept="image/*" name="gambar" class="form-control @error('gambar') is-invalid @enderror" value="{{ old('gambar', $resep->gambar) }}">
+                <img src="{{ URL::asset('storage/images/'.$resep->gambar) }}" class="col-sm-3" id="Vgambar" alt="">
+            <div class="col-sm-5 my-auto">
+                <input onchange="inputGambar()" type="file" accept="image/*" id="gambar" name="gambar" class="form-control @error('gambar') is-invalid @enderror" value="{{ old('gambar', $resep->gambar) }}">
                 @error('gambar')
                     <div class="invalid-feedback">{{ $message }}</div>
                 @enderror
@@ -64,4 +66,17 @@
             </div>
         </div>
     </form>
+    <script>
+        function inputGambar() {
+            const gambar = document.querySelector('#gambar');
+            const preview = document.querySelector('#Vgambar');
+
+            const fileFoto = new FileReader();
+            fileFoto.readAsDataURL(gambar.files[0]);
+
+            fileFoto.onload = function(e) {
+                preview.src = e.target.result;
+            }
+        }
+    </script>
 @endsection

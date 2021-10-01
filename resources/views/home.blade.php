@@ -9,7 +9,7 @@
             <div class="col-md-4 col-lg-4 me-md-auto col-sm-4 col-4 mb-3 text-center">
                 <div class="col-lg-11 p-5 mx-auto border">
                     <a href=" /watch/{{ $video->id }}" class="nav-link w-100">
-                        <img class="img-fluid card-img" src="assets/thumbnails/demo.png" alt="">
+                        <img class="img-fluid card-img" src="{{URL::asset('storage/images/'.$video->gambar) }}" alt="">
                     </a>
                 </div>
                 <a href="/watch/{{ $video->id }}" class="nav-link">

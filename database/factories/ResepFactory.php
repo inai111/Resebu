@@ -27,7 +27,7 @@ class ResepFactory extends Factory
             'nama'=>$this->faker->sentence(3,false),
             'body'=>$this->faker->paragraphs(6,true),
             'video'=> 'default.mp4',
-            'gambar'=> 'dafault.png',
+            'gambar'=> 'default.png',
         ];
     }
 }

@@ -4,6 +4,7 @@
     <ol class="breadcrumb mb-4">
         <li class="breadcrumb-item active">{{ $resep->user->nama }}</li>
     </ol>
+    {{-- @dd($resep->gambar) --}}
     <div class="clearfix">
         <img src="{{ URL::asset('storage/images/'.$resep->gambar) }}" class="col-md-4 float-md-end mb-3 ms-md-3" alt="...">
         <p>{!! $resep->body !!}</p>

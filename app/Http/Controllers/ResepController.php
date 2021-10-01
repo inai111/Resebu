@@ -58,6 +58,7 @@ class ResepController extends Controller
             'kategori' => 'required',
             'kategori' => 'required',
             'gambar' => 'required|mimes:jpg,png,jpeg|mimetypes:image/jpg,image/png,image/jpeg',
+            'video' => 'file|max:40000|mimes:mp4|mimetypes:video/mpeg,video/avi,video/mp4',
             'body' => 'required'
         ];
         $request->validate($rule);
@@ -70,7 +71,6 @@ class ResepController extends Controller
                 'gambar' => $request->file('gambar')->hashName(),
             ];
             if ($request->hasFile('video')) {
-                $request->validate(['video' => 'mimes:mp4|mimetypes:video/mpeg,video/avi,video/mp4']);
                 $request->video->store('videos');
                 $validated['video'] = $request->file('video')->hashName();
             };
@@ -124,26 +124,29 @@ class ResepController extends Controller
             'nama' => 'required',
             'kategori' => 'required',
             'body' => 'required',
+            'video' => 'file|max:4000|mimes:mp4|mimetypes:video/mpeg,video/avi,video/mp4',
+            'gambar' => 'mimes:jpg,png,jpeg|mimetypes:image/jpg,image/png,image/jpeg',
         ];
-        $request->validate($rule);
-        $validated = [
-            'nama' => $request->nama,
-            'id_kategori' => $request->kategori,
-            'body' => $request->body,
-        ];
-        if ($request->hasFile('video')) {
-            $request->validate(['video' => 'mimes:mp4|mimetypes:video/mpeg,video/avi,video/mp4']);
-            $request->video->store('videos');
-            Storage::disk('public')->delete('videos/' . $resep->gambar);
-            $validated['video'] = $request->file('video')->hashName();
-        };
-        if ($request->hasFile('gambar')) {
-            $request->validate(['gambar' => 'required|mimes:jpg,png,jpeg|mimetypes:image/jpg,image/png,image/jpeg']);
-            $request->gambar->store('public/images');
-            Storage::disk('public')->delete('images/' . $resep->gambar);
-            $validated['gambar'] = $request->file('gambar')->hashName();
-        };
-        Resep::where('id', $resep->id)->update($validated);
+        if ($request->validate($rule)) {
+            $validated = [
+                'nama' => $request->nama,
+                'id_kategori' => $request->kategori,
+                'body' => $request->body,
+            ];
+            if ($request->hasFile('video')) {
+                $request->video->store('public/videos');
+                if ($resep->video != 'default.mp4')
+                    Storage::disk('public')->delete('videos/' . $resep->video);
+                $validated['video'] = $request->file('video')->hashName();
+            };
+            if ($request->hasFile('gambar')) {
+                $request->gambar->store('public/images');
+                if ($resep->gambar != 'default.png')
+                    Storage::disk('public')->delete('images/' . $resep->gambar);
+                $validated['gambar'] = $request->file('gambar')->hashName();
+            };
+            Resep::where('id', $resep->id)->update($validated);
+        }
         return redirect()->route('resep.index')->with('flash', 'Data telah berhasil di Update');
     }
 
@@ -156,6 +159,10 @@ class ResepController extends Controller
     public function destroy(Resep $resep)
     {
         //
+        if ($resep->video != 'default.mp4')
+            Storage::disk('public')->delete('videos/' . $resep->video);
+        if ($resep->gambar != 'default.png')
+            Storage::disk('public')->delete('images/' . $resep->gambar);
         $resep->delete();
         return back()->with('flash', 'Data telah berhasil di Hapus!');
     }

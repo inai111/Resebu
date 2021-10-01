@@ -42,9 +42,9 @@
                     aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                     @if(auth()->user())
-                    <li><a class="dropdown-item" href="dashboard">Dashboard</a></li>
+                    <li><a class="dropdown-item" href="/dashboard">Dashboard</a></li>
                     <li><a class="dropdown-item" href="{{ route('resep.create') }}">Tambah Resep</a></li>
-                    <li><a class="dropdown-item" href="profil">Profil</a></li>
+                    <li><a class="dropdown-item" href="/profil">Profil</a></li>
                     <li>
                         <hr class="dropdown-divider" />
                     </li>
