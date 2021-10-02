@@ -71,7 +71,7 @@ class ResepController extends Controller
                 'gambar' => $request->file('gambar')->hashName(),
             ];
             if ($request->hasFile('video')) {
-                $request->video->store('videos');
+                $request->video->store('public/videos');
                 $validated['video'] = $request->file('video')->hashName();
             };
             Resep::create($validated);
