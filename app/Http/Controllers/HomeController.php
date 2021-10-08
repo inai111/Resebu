@@ -8,14 +8,14 @@ use Illuminate\Http\Request;
 class HomeController extends Controller
 {
     public function index(Resep $resep){
-        $side = $resep->where('id_kategori',1)->orderBy('updated_at','desc')->limit(4)->get();
+        $side = $resep->where('body','!=',null)->orderBy('updated_at','desc')->limit(4)->get();
         return view('home',[
             'sides'=> $side,
             'videos'=>$resep->where('video','!=','null')->orderBy('updated_at','desc')->limit(9)->get(),
         ]);
     }
     public function pencarian(Request $request, Resep $resep){
-        $side = $resep->where('id_kategori',1)->orderBy('updated_at','desc')->limit(4)->get();
+        $side = $resep->where('body','!=',null)->orderBy('updated_at','desc')->limit(4)->get();
         $reseps = $resep->where('nama','like','%'.$request->pencarian.'%')->orderBy('updated_at','desc')->get();
         // return $reseps;
         if(!empty($request->video)){
@@ -29,7 +29,7 @@ class HomeController extends Controller
         ]);
     }
     public function watch(Resep $resep, $id){
-        $side = $resep->where('id_kategori',1);
+        $side = $resep->where('body','!=',null);
         $side = $side->where('id','!=',$id)->orderBy('updated_at','desc')->limit(4)->get();
         
         $video = $resep->where('video','!=',null);
@@ -44,7 +44,7 @@ class HomeController extends Controller
         ]);
     }
     public function read(Resep $resep, $id){
-        $side = $resep->where('id_kategori',1);
+        $side = $resep->where('body','!=',null);
         $side = $side->where('id','!=',$id)->orderBy('updated_at','desc')->limit(4)->get();
         $resep = $resep->all();
         return view('resep',[
