@@ -24,8 +24,8 @@
                 class="fas fa-bars"></i></button>
         <!-- Navbar Search-->
         <form method="post" action="/pencarian"
-        class="d-none d-md-inline-block form-inline ms-auto w-50 me-0 me-md-3 my-2 my-md-0">
-        @csrf
+            class="d-none d-md-inline-block form-inline ms-auto w-50 me-0 me-md-3 my-2 my-md-0">
+            @csrf
             <div class="input-group">
                 <input type="text" name="pencarian" class="form-control" placeholder="Cari">
                 <button class="btn btn-secondary" id="btnNavbarSearch" type="submit"><i
@@ -41,16 +41,16 @@
                 <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown"
                     aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                    @if(auth()->user())
-                    <li><a class="dropdown-item" href="/dashboard">Dashboard</a></li>
-                    <li><a class="dropdown-item" href="{{ route('resep.create') }}">Tambah Resep</a></li>
-                    <li><a class="dropdown-item" href="/profil">Profil</a></li>
-                    <li>
-                        <hr class="dropdown-divider" />
-                    </li>
-                    <li><a class="dropdown-item" href="/logout">Keluar</a></li>
+                    @if (auth()->user())
+                        <li><a class="dropdown-item" href="/dashboard">Dashboard</a></li>
+                        <li><a class="dropdown-item" href="{{ route('resep.create') }}">Tambah Resep</a></li>
+                        <li><a class="dropdown-item" href="/profil">Profil</a></li>
+                        <li>
+                            <hr class="dropdown-divider" />
+                        </li>
+                        <li><a class="dropdown-item" href="/logout">Keluar</a></li>
                     @else
-                    <li><a class="dropdown-item" href="/login">Masuk</a></li>
+                        <li><a class="dropdown-item" href="/login">Masuk</a></li>
                     @endif
                 </ul>
             </li>
@@ -62,10 +62,6 @@
                 <div class="sb-sidenav-menu">
                     @include('partials.main')
                 </div>
-                {{-- <div class="sb-sidenav-footer">
-                        <div class="small">Logged in as:</div>
-                        Start Bootstrap
-                    </div> --}}
             </nav>
         </div>
         <div id="layoutSidenav_content">
