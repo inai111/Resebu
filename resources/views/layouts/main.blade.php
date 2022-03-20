@@ -5,6 +5,7 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="description" content="" />
     <meta name="author" content="" />
     <title>RESEBU</title>
@@ -23,13 +24,11 @@
         <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i
                 class="fas fa-bars"></i></button>
         <!-- Navbar Search-->
-        <form method="post" action="/pencarian"
-            class="d-none d-md-inline-block form-inline ms-auto w-50 me-0 me-md-3 my-2 my-md-0">
+        <form id="formIni" class="d-none d-md-inline-block form-inline ms-auto w-50 me-0 me-md-3 my-2 my-md-0">
             @csrf
             <div class="input-group">
-                <input type="text" name="pencarian" class="form-control" placeholder="Cari">
-                <button class="btn btn-secondary" id="btnNavbarSearch" type="submit"><i
-                        class="fas fa-search"></i></button>
+                <input type="text" id="pencarians" name="pencarian" class="form-control" placeholder="Cari">
+                <button class="btn btn-secondary" id="carien"><i class="fas fa-search"></i></button>
             </div>
         </form>
         <!-- Navbar-->
@@ -86,10 +85,12 @@
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous">
     </script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="{{ URL::asset('js/scripts.js') }}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
-    <script src="{{ URL::asset('js/datatables-simple-demo.js') }}"></script>
+    <script src="{{ URL::asset('js/script.js') }}"></script>
 </body>
 
 </html>

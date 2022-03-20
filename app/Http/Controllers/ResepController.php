@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\KategoriModel;
+use App\Models\Komunitas;
 use App\Models\Resep;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -16,17 +17,20 @@ class ResepController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request, Resep $resep)
+    public function index(Request $request, Resep $resep,Komunitas $komunitas)
     {
+        $myKomunitas = $komunitas->where('user_id', '=', $request->user()->id)->get();
         if ($request->user()->level == 1) {
             $reseps = $resep->get();
             return view('user.resep', [
                 'reseps' => $reseps->all(),
+                'komunitas'=>$myKomunitas->first()
             ]);
         } else {
             $reseps = $resep->where('id_user', $request->user()->id)->get();
             return view('user.resep', [
                 'reseps' => $reseps->all(),
+                'komunitas'=>$myKomunitas->first()
             ]);
         };
         // return $user->get();
@@ -37,11 +41,13 @@ class ResepController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Komunitas $komunitas, Request $request)
     {
         //
+        $myKomunitas = $komunitas->where('user_id', '=', $request->user()->id)->get();
         return view('user.addResep', [
-            'kategoris' => KategoriModel::get()
+            'kategoris' => KategoriModel::get(),
+            'komunitas'=>$myKomunitas->first()
         ]);
     }
 
@@ -53,6 +59,8 @@ class ResepController extends Controller
      */
     public function store(Request $request)
     {
+        $komunitas = new Komunitas();
+        $myKomunitas = $komunitas->where('user_id', '=', $request->user()->id)->get();
         $rule = [
             'nama' => 'required',
             'kategori' => 'required',
@@ -89,9 +97,11 @@ class ResepController extends Controller
     public function show(Resep $resep)
     {
         // return $resep;
-        $user = new User();
+        $komunitas = new Komunitas();
+        $myKomunitas = $komunitas->where('user_id', '=', $resep->user->id)->get();
         return view('user.showResep', [
             'resep' => $resep,
+            'komunitas'=>$myKomunitas->first()
         ]);
     }
 
@@ -103,10 +113,13 @@ class ResepController extends Controller
      */
     public function edit(Resep $resep)
     {
+        $komunitas = new Komunitas();
+        $myKomunitas = $komunitas->where('user_id', '=', $resep->user->id)->get();
         // return $resep->id_kategori;
         $kategoris = new KategoriModel;
         return view('user.editResep', [
             'resep' => $resep,
+            'komunitas'=>$myKomunitas->first(),
             'kategoris' => $kategoris->get()
         ]);
     }

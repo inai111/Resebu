@@ -15,7 +15,10 @@ class Resep extends Model
     protected $table = 'reseps';
 
     public function user(){
-        return $this->belongsTo(User::class,'id_user');
+        return $this->belongsTo(UserModel::class,'id_user');
+    }
+    public function komunitas(){
+        return $this->belongsTo(Komunitas::class,'id_user','user_id');
     }
     public function kategori(){
         return $this->belongsTo(KategoriModel::class,'id_kategori');

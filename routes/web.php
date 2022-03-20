@@ -4,6 +4,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ResepController;
+use App\Http\Controllers\KomunitasController;
 use App\Models\User;
 use GuzzleHttp\Middleware;
 use Illuminate\Http\Client\Request;
@@ -24,6 +25,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'index']);
 Route::post('/pencarian', [HomeController::class, 'pencarian']);
+Route::post('/pencarian2', [HomeController::class, 'pencarian2']);
 Route::get('watch/{id}', [HomeController::class, 'watch']);
 Route::get('/read/{id}', [HomeController::class, 'read']);
 
@@ -46,4 +48,11 @@ Route::post('/dashboard/profil/{id}', function ($id) {
 Route::get('/profil', [DashboardController::class, 'profil'])->middleware('auth');
 Route::post('/profil', [DashboardController::class, 'updateProfil'])->middleware('auth');
 Route::delete('/user/{user}', [DashboardController::class, 'delete'])->middleware('auth');
+
 Route::resource('resep', ResepController::class)->middleware('auth');
+
+Route::get('komunitas', [KomunitasController::class, 'index'])->middleware('auth');
+Route::get('komunitas/{id}', [KomunitasController::class, 'show']);
+Route::get('/komunitas/create', [KomunitasController::class, 'create'])->middleware('auth');
+Route::post('/komunitas', [KomunitasController::class, 'store'])->middleware('auth');
+Route::put('/komunitas', [KomunitasController::class, 'update'])->middleware('auth');

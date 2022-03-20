@@ -3,7 +3,13 @@
     {{-- @dd($resep->kategori->kategori) --}}
     <h1 class="mt-4">{{ $resep->nama }}</h1>
     <ol class="breadcrumb mb-4">
-        <li class="breadcrumb-item active">{{ $resep->user->nama }} <span
+        <li class="breadcrumb-item active">
+            @if($resep->komunitas)
+            Oleh <a href="/komunitas/{{$resep->komunitas->id}}">{{ucwords($resep->komunitas->nama_komunitas)}}</a>
+            @else
+            {{$resep->user->nama }} 
+            @endif
+            <span
                 class="badge bg-danger ms-3">{{ $resep->kategori->kategori }}</span></li>
     </ol>
     <div class="row">

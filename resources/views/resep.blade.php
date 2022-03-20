@@ -2,7 +2,13 @@
 @section('container')
 <h1 class="mt-4">{{ $resep->nama }}</h1>
     <ol class="breadcrumb mb-4">
-        <li class="breadcrumb-item active">{{ $resep->user->nama }}</li>
+        <li class="breadcrumb-item active">
+            @if(($resep->komunitas))
+            <a href="/komunitas/{{$resep->komunitas->id}}">{{ucwords($resep->komunitas->nama_komunitas)}}</a>
+            @else
+            {{$resep->user->nama }} 
+            @endif
+            </li>
     </ol>
     {{-- @dd($resep->gambar) --}}
     <div class="clearfix">

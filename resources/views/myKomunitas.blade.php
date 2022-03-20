@@ -1,0 +1,92 @@
+@extends('layouts.admin')
+@section('container')
+    <form action="/komunitas" method="POST">
+        <div class="py-4" style="background-image: url('/assets/img/banner.jpg')">
+            @method('PUT')
+            @csrf
+            <input type="hidden" name="id_komunitas" value="{{$komunitas->id}}">
+            <div style="background-color: rgba(94, 94, 92, 0.6)">
+                <div class="row text-light">
+                    <div class="col-8">
+                        <div class="p-2">
+                            <h1 class="display-3">{{ ucwords($komunitas->nama_komunitas) }}</h1>
+                            <p class="lead ms-4"><strong>Bergabung Resebu sejak
+                                    {{ date('d M Y', strtotime($komunitas->created_at)) }}</strong></p>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="p-2">
+                            <h5> <span class="display-6">Alamat</span> <button
+                                    class="badge bg-secondary edit_alamat">Edit</button></h5>
+                            <hr>
+                            <small id="editAlamat">{{ ucwords($komunitas->alamat) }}</small>
+                            <div class="form_alamat" style="display: none">
+                                <textarea name="alamat" class="form-controls" cols="35" rows="2">{{ ucwords($komunitas->alamat) }}</textarea>
+                                <div class="mt-2">
+                                    <button type="submit" class="btn btn-success">Selesai</button>
+                                    <button id="batalAlamat" class="btn btn-warning">Batal</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Anggota</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (json_decode($komunitas->peserta) as $p)
+                            <tr>
+                                <td>{{ $p }}</td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-9">
+                <div class="row">
+                    <h5> <span class="display-5">Bio</span> <button class="badge bg-secondary edit_bio">Edit</button>
+                    </h5>
+                    <hr>
+                    <p id="editBio" class="lead">{{ $komunitas->bio }}</p>
+                    <div class="form_bio" style="display: none">
+                        <textarea name="bio" class="form-controls" cols="70" rows="4">{{ ucwords($komunitas->bio) }}</textarea>
+                        <div class="mt-2">
+                            <button type="submit" class="btn btn-success">Selesai</button>
+                            <button id="batalBio" class="btn btn-warning">Batal</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    <script>
+        var get = e => document.querySelector(e);
+        get('#batalAlamat').addEventListener('click', e => {
+            e.preventDefault();
+            get('#editAlamat').style.display = 'block';
+            get('.form_alamat').style.display = 'none';
+        })
+        get('.edit_alamat').addEventListener('click', e => {
+            e.preventDefault();
+            get('#editAlamat').style.display = 'none';
+            get('.form_alamat').style.display = 'block';
+        })
+        get('#batalBio').addEventListener('click', e => {
+            e.preventDefault();
+            get('#editBio').style.display = 'block';
+            get('.form_bio').style.display = 'none';
+        })
+        get('.edit_bio').addEventListener('click', e => {
+            e.preventDefault();
+            get('#editBio').style.display = 'none';
+            get('.form_bio').style.display = 'block';
+        })
+    </script>
+@endsection

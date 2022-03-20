@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Komunitas;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -9,26 +10,27 @@ use Illuminate\Support\Facades\Hash;
 
 class DashboardController extends Controller
 {
-    public function index(User $user, Request $request){
+    public function index(User $user, Request $request, Komunitas $komunitas){
         $user = collect($user->get());
         $user = $user->where('username','!=',$request->user()->username);
         $user = $user->where('username','!=','admin');
         if(request()->user()->level==1){
-            return view('user.dashboard',['users'=>$user->all()]);
+            $myKomunitas = $komunitas->where('user_id', '=', request()->user()->id)->get();
+            return view('user.dashboard',['users'=>$user->all(), 'komunitas' => $myKomunitas->first()]);
         }
         return redirect()->route('resep.index');
     }
-    public function dataResep(){
-        return view('admin/resep');
+    public function dataResep(Komunitas $komunitas){
+        $myKomunitas = $komunitas->where('user_id', '=', request()->user()->id)->get();
+        return view('admin/resep',['komunitas' => $myKomunitas->first()]);
     }
-    public function profil(){
+    public function profil(Komunitas $komunitas){
         $user = request()->user();
-        if(request()->user()->level==1){
+        $myKomunitas = $komunitas->where('user_id', '=', request()->user()->id)->get();
             return view('user/profil',[
-                'user'=>$user
+                'user'=>$user, 
+                'komunitas' => $myKomunitas->first()
             ]);
-        }
-        return back();
     }
     public function lihatProfil(User $user,$id){
         $user = $user->all();
