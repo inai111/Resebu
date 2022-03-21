@@ -18,11 +18,16 @@ class KomunitasController extends Controller
     {
         //
         $user = request()->user();
-        $myKomunitas = $komunitas->where('user_id', '=', $user['id'])->get();
-        if (count($myKomunitas) == 0) {
-            return view('komunitas', ['user' => $user]);
-        } else {
-            return view('myKomunitas', ['user' => $user, 'komunitas' => $myKomunitas[0]]);
+        if($user->level!=1){
+            $myKomunitas = $komunitas->where('user_id', '=', $user['id'])->get();
+            if (count($myKomunitas) == 0) {
+                return view('komunitas', ['user' => $user]);
+            } else {
+                return view('myKomunitas', ['user' => $user, 'komunitas' => $myKomunitas[0]]);
+            }
+        }else{
+            $komunitas = $komunitas->all();
+            return view('dKomunitas',['komunitas'=>$komunitas]);
         }
     }
 
@@ -109,6 +114,7 @@ class KomunitasController extends Controller
         $data = [
             'alamat'=>$request->alamat,
             'bio'=>$request->bio,
+            'peserta'=>json_encode(explode(',',$request->anggota)),
         ];
         Komunitas::where('id', $request->id_komunitas)->update($data);
         return redirect('komunitas'); 
@@ -123,5 +129,9 @@ class KomunitasController extends Controller
     public function destroy($id)
     {
         //
+        if(Komunitas::where('id','=',$id)->delete()){
+            return back()->with('flash', 'Data telah berhasil di Hapus!');
+        }
+        return back()->with('flash', 'Data telah gagal di Hapus!');
     }
 }

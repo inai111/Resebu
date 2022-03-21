@@ -52,7 +52,10 @@ Route::delete('/user/{user}', [DashboardController::class, 'delete'])->middlewar
 Route::resource('resep', ResepController::class)->middleware('auth');
 
 Route::get('komunitas', [KomunitasController::class, 'index'])->middleware('auth');
-Route::get('komunitas/{id}', [KomunitasController::class, 'show']);
+Route::get('/komunitas/{id}', [KomunitasController::class, 'show'])
+->where('id', '[0-9]+');
 Route::get('/komunitas/create', [KomunitasController::class, 'create'])->middleware('auth');
 Route::post('/komunitas', [KomunitasController::class, 'store'])->middleware('auth');
 Route::put('/komunitas', [KomunitasController::class, 'update'])->middleware('auth');
+Route::get('/komunitas/destroy/{id}', [KomunitasController::class, 'destroy'])->middleware('auth')
+->where('id', '[0-9]+');

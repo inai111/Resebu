@@ -11,4 +11,7 @@ class Komunitas extends Model
     protected $guarded=['id'];
     protected $table = 'komunitas';
     
+    public function user(){
+        return $this->belongsTo(UserModel::class);
+    }
 }

@@ -37,10 +37,10 @@
                 <table class="table">
                     <thead>
                         <tr>
-                            <th>Anggota</th>
+                            <th class="d-flex justify-content-between">Anggota <button class="badge bg-secondary edit_anggota">Edit</button></th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody id="editAnggota">
                         @foreach (json_decode($komunitas->peserta) as $p)
                             <tr>
                                 <td>{{ $p }}</td>
@@ -48,6 +48,13 @@
                         @endforeach
                     </tbody>
                 </table>
+                <div class="form_anggota" style="display: none">
+                    <textarea name="anggota" class="form-controls" cols="25" rows="4">{{ implode(',',json_decode($komunitas->peserta)) }}</textarea>
+                    <div class="mt-2">
+                        <button type="submit" class="btn btn-success">Selesai</button>
+                        <button id="batalAnggota" class="btn btn-warning">Batal</button>
+                    </div>
+                </div>
             </div>
             <div class="col-9">
                 <div class="row">
@@ -87,6 +94,16 @@
             e.preventDefault();
             get('#editBio').style.display = 'none';
             get('.form_bio').style.display = 'block';
+        })
+        get('#batalAnggota').addEventListener('click', e => {
+            e.preventDefault();
+            get('#editAnggota').style.display = 'block';
+            get('.form_anggota').style.display = 'none';
+        })
+        get('.edit_anggota').addEventListener('click', e => {
+            e.preventDefault();
+            get('#editAnggota').style.display = 'none';
+            get('.form_anggota').style.display = 'block';
         })
     </script>
 @endsection

@@ -8,7 +8,7 @@
             Data Resep
         </a>
         <a class="nav-link {{ Request::is('komunitas*')? 'active':'' }}" href="/komunitas">
-            {{isset($komunitas)?ucwords($komunitas->nama_komunitas):'Buat Komunitas'}}
+            Data Komunitas
         </a>
     </div>
 @else

@@ -1,4 +1,4 @@
-const base_url = 'http://localhost:8000/';
+const base_url = 'http://127.0.0.1:8000/';
 // console.log(`${base_url}`)
 $('#pencarians').keyup(function (e) {
     let _token = $('meta[name="csrf-token"]').attr('content');
