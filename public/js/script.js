@@ -1,19 +1,18 @@
-const base_url = 'http://127.0.0.1:8000/';
+const base_url = location.origin;
 // console.log(`${base_url}`)
 $('#pencarians').keyup(function (e) {
     let _token = $('meta[name="csrf-token"]').attr('content');
     // e.preventDefault();
     var hac = '';
     $.ajax({
-        type: 'post',
-        url: base_url + 'pencarian2',
+        type: 'get',
+        url: base_url + '/pencarian2',
         data: {
-            _token: _token,
             pencarian: $(this).val(),
         },
         dataType: 'json',
         success: function (datas) {
-            console.log(datas.datas);
+            // console.log(datas.datas);
             datas.datas.forEach(element => {
                 var date = new Date(element.created_at);
                 hac += `

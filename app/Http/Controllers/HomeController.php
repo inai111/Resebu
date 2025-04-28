@@ -11,21 +11,26 @@ class HomeController extends Controller
 {
     public function index(Resep $resep)
     {
+        $search = request()->pencarian;
         $side = $resep->where('body', '!=', null)->orderBy('updated_at', 'desc')->limit(4)->get();
-        // dd($side[0]->user);
+        $videos = $resep->where('video', '!=', 'null')->orderBy('updated_at', 'desc')->limit(9);
+        if($search != ''){
+            $videos = $resep->where('nama', 'like', "%$search%");
+        }
         return view('home', [
             'sides' => $side,
-            'videos' => $resep->where('video', '!=', 'null')->orderBy('updated_at', 'desc')->limit(9)->get(),
+            'videos' => $videos->get(),
         ]);
     }
     public function pencarian(Request $request, Resep $resep)
     {
         $side = $resep->where('body', '!=', null)->orderBy('updated_at', 'desc')->limit(4)->get();
 
-        $reseps = $resep->where('nama', 'like', '%' . $request->pencarian . '%')->orderBy('updated_at', 'desc')->get();
         // return $reseps;
-        if (!empty($request->video)) {
-            $reseps = $resep->where('video', '!=', 'null')->orderBy('updated_at', 'desc')->get();
+        if ($request->video==1) {
+            $reseps = $resep->where('video', '!=', 'null')->orderBy('updated_at', 'desc')->paginate(9)->withQueryString();
+        }else{
+            $reseps = $resep->where('nama', 'like', '%' . $request->pencarian . '%')->orderBy('updated_at', 'desc')->paginate(9)->withQueryString();
         }
         return view('pencarian', [
             'reseps' => $reseps,
@@ -36,10 +41,6 @@ class HomeController extends Controller
     }
     public function pencarian2(Request $request, Resep $resep, User $user)
     {
-        // dd($request);
-        // $request->validate([
-        //     'pencarian' => 'required'
-        // ]);
         if ($request->pencarian == '' || $request->pencarian == null) {
             $datas = $resep->get();
         } else {

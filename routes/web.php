@@ -24,8 +24,8 @@ use Illuminate\Support\Facades\Route;
 // });
 
 Route::get('/', [HomeController::class, 'index']);
-Route::post('/pencarian', [HomeController::class, 'pencarian']);
-Route::post('/pencarian2', [HomeController::class, 'pencarian2']);
+Route::get('/pencarian', [HomeController::class, 'pencarian'])->name('all-pencarian');
+Route::get('/pencarian2', [HomeController::class, 'pencarian2']);
 Route::get('watch/{id}', [HomeController::class, 'watch']);
 Route::get('/read/{id}', [HomeController::class, 'read']);
 

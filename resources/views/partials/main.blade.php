@@ -14,10 +14,5 @@
         </a>
         <hr>
     @endforeach
-    <form action="/pencarian" class="mb-3 "  method="post">
-        @method('post')
-        @csrf
-        <input type="hidden" name="pencarian" value="">
-        <button class="btn w-100 btn-light rounded-0">Tampilkan Lebih</button>
-    </form>
+    <a href="{{ route('all-pencarian') }}" class="btn w-100 btn-light rounded-0">Tampilkan Lebih</a>
 </div>

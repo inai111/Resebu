@@ -25,11 +25,6 @@
             </div>
         @endforeach
     </div>
-    <form action="/pencarian" method="post">
-        @method('post')
-        @csrf
-        <input type="hidden" name="video" value="1">
-        <button class="btn w-100 btn-secondary">Tampilkan Lebih</button>
-    </form>
+    <a href="{{ route('all-pencarian',['video'=>1]) }}" class="btn w-100 btn-secondary">Tampilkan Lebih</a>
 
 @endsection

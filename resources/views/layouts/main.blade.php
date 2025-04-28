@@ -25,9 +25,8 @@
                 class="fas fa-bars"></i></button>
         <!-- Navbar Search-->
         <form id="formIni" class="d-none d-md-inline-block form-inline ms-auto w-50 me-0 me-md-3 my-2 my-md-0">
-            @csrf
             <div class="input-group">
-                <input type="text" id="pencarians" name="pencarian" class="form-control" placeholder="Cari">
+                <input type="text" id="pencarians" name="pencarian" value="{{request()->get('pencarian')}}" class="form-control" placeholder="Cari">
                 <button class="btn btn-secondary" id="carien"><i class="fas fa-search"></i></button>
             </div>
         </form>
@@ -73,11 +72,6 @@
                 <div class="container-fluid px-4">
                     <div class="d-flex align-items-center justify-content-between small">
                         <div class="text-muted">Copyright &copy; Resibu Enterprise 2021</div>
-                        {{-- <div>
-                                <a href="#">Privacy Policy</a>
-                                &middot;
-                                <a href="#">Terms &amp; Conditions</a>
-                            </div> --}}
                     </div>
                 </div>
             </footer>
@@ -88,9 +82,9 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"
         integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="{{ URL::asset('js/scripts.js') }}"></script>
+    <script src="{{ URL::asset('js/script.js') }}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
-    <script src="{{ URL::asset('js/script.js') }}"></script>
 </body>
 
 </html>

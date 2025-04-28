@@ -24,7 +24,7 @@ class DatabaseSeeder extends Seeder
             'email'=> 'admin@gm.co',
             'alamat' => Str::random(15),
             'nomer' => 8080,
-            'password' => Hash::make(12341234),
+            'password' => Hash::make('password'),
             'level' => 1,
             'created_at' => now(),
             'updated_at' => now(),

@@ -33,6 +33,7 @@
                         </div>
                     </div>
                 @endforeach
+                {{$reseps->links()}}
             @else
                 <div class="text-center">
                     <h3 class="mt-5">Hasil Pencarian Tidak Ditemukan</h3>
