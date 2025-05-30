@@ -15,9 +15,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="bg-slate-200">
-        <AppNavbar>
-          {children}
-        </AppNavbar>
+        {children}
       </body>
     </html>
   );
