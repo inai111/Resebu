@@ -40,7 +40,7 @@ export default function AppNavbar() {
   })
 
   return (
-    <div className="h-20">
+    <div className="h-20 print:hidden">
       <nav className="flex justify-between px-3 h-20 items-center py-1 fixed top-0 w-full z-20 bg-slate-100/60 backdrop-blur-md">
         <Link href='/' className="text-black flex items-center lg:text-3xl text-xl font-bold cursor-pointer hover:text-slate-800 md:w-60 lg:w-80 justify-center">!Resebu!
           <Image

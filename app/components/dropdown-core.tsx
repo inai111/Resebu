@@ -15,7 +15,7 @@ export default function DropdownCore({ children }: DropdownProps) {
     useEffect(() => {
         function handleClickOutside(event: MouseEvent) {
             let ref = dropdownRef.current;
-            if (isOpen && ref && !ref.contains(event.currentTarget as Node)) {
+            if (isOpen && ref && !ref.contains(event.target as Node)) {
                 setOpen(false);
             }
         }
